@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const blogsSchema = new mongoose.Schema(
+const newseventsSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -16,8 +16,9 @@ const blogsSchema = new mongoose.Schema(
     content: {
       type: String,
     },
-    youtubeLink: {
-      type: String,
+    eventDate: {
+      type: Date,
+      default: Date.now,
     },
     status: {
       type: String,
@@ -27,6 +28,6 @@ const blogsSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const Blogs = mongoose.model("Blogs", blogsSchema);
+const Newsevents = mongoose.model("Newsevents", newseventsSchema);
 
-module.exports = Blogs;
+module.exports = Newsevents;

@@ -19,8 +19,27 @@ const getAllProjects = tryCatch(async (req, res, next) => {
     arrList,
   });
 });
+const deleteProject = tryCatch(async (req, res, next) => {
+  const deleteObj = await projectsService.deleteProject(req.query.id);
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    deleteObj,
+  });
+});
+
+const editProject = tryCatch(async (req, res, next) => {
+  const deleteObj = await projectsService.editProject(req, res);
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    deleteObj,
+  });
+});
 
 module.exports = {
   createProject,
   getAllProjects,
+  deleteProject,
+  editProject,
 };
