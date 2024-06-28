@@ -6,6 +6,10 @@ const newseventsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     mainImage: {
       type: String,
       required: true,
