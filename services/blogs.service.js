@@ -5,7 +5,11 @@ const { upload } = require("../utils/multerFileUpload");
 const fs = require("fs");
 
 const removeFromDirectory = async (image) => {
-  return await fs.unlinkSync(`public\\uploads\\${image}`);
+  try {
+    return await fs.unlinkSync(`public\\uploads\\${image}`);
+  } catch (error) {
+    console.log("error", error);
+  }
 };
 
 const createBlog = (req, res) => {

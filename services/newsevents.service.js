@@ -1,13 +1,15 @@
-const Blogs = require("../models/blogs.model");
 const Newsevents = require("../models/newsevents.model");
 const { upload } = require("../utils/multerFileUpload");
 
 const fs = require("fs");
 
 const removeFromDirectory = async (image) => {
-  return await fs.unlinkSync(`public\\uploads\\${image}`);
+  try {
+    return await fs.unlinkSync(`public\\uploads\\${image}`);
+  } catch (error) {
+    console.log("error", error);
+  }
 };
-
 const createNews = (req, res) => {
   return new Promise((resolve, reject) => {
     const multipleUpload = upload.fields([
@@ -58,8 +60,64 @@ const deleteNews = async (objectId) => {
   return deletedDoc;
 };
 
+const editNews = (req, res) => {
+  return new Promise((resolve, reject) => {
+    const multipleUpload = upload.fields([{ name: "mainImage", maxCount: 1 }]);
+
+    multipleUpload(req, res, async function (err) {
+      const deleteFile = (error) => {
+        if (req.files.mainImage[0]) {
+          removeFromDirectory(req.file.mainImage[0].filename);
+        }
+        reject(error);
+      };
+
+      if (err) {
+        console.log("error", err);
+        deleteFile(new AppError(400, err.message));
+      } else {
+        try {
+          const projectData = await Newsevents.findById(req.query.id);
+          console.log("productData", projectData);
+          let editProjectData;
+          console.log("req", req.body);
+          console.log("req.file", req.files);
+          if (!Object.keys(req.files).length) {
+            editProjectData = await Newsevents.updateOne(
+              { _id: req.query.id },
+              { $set: req.body }
+            );
+          } else {
+            console.log("working2");
+            let mainImage;
+            if (req.files.mainImage && req.files.mainImage.length) {
+              mainImage = req.files.mainImage[0].filename;
+            }
+
+            if (mainImage) {
+              req.body.mainImage = mainImage;
+              await removeFromDirectory(req.body.removedMainImage);
+            }
+
+            editProjectData = await Newsevents.updateOne(
+              { _id: req.query.id },
+              { $set: req.body }
+            );
+          }
+
+          resolve(editProjectData);
+        } catch (error) {
+          console.log("Error", error);
+          deleteFile(error);
+        }
+      }
+    });
+  });
+};
+
 module.exports = {
   getAllNews,
   createNews,
   deleteNews,
+  editNews,
 };

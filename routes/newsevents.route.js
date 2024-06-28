@@ -7,5 +7,6 @@ const router = express.Router();
 router.post("/add", newsEventsController.createNews);
 router.get("/get", newsEventsController.getAllNews);
 router.delete("/delete", newsEventsController.deleteNews);
+router.put("/edit", newsEventsController.editNews);
 
 module.exports = router;

@@ -29,8 +29,18 @@ const deleteNews = tryCatch(async (req, res, next) => {
   });
 });
 
+const editNews = tryCatch(async (req, res, next) => {
+  const deleteObj = await newsService.editNews(req, res);
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    deleteObj,
+  });
+});
+
 module.exports = {
   createNews,
   getAllNews,
   deleteNews,
+  editNews
 };
