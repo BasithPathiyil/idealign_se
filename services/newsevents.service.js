@@ -115,9 +115,15 @@ const editNews = (req, res) => {
   });
 };
 
+const featuredCount = async () => {
+  let count = await Newsevents.countDocuments();
+  return count;
+};
+
 module.exports = {
   getAllNews,
   createNews,
   deleteNews,
   editNews,
+  featuredCount
 };

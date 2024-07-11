@@ -160,9 +160,15 @@ const editProject = (req, res) => {
   });
 };
 
+const featuredCount = async () => {
+  let count = await Projects.countDocuments();
+  return count;
+};
+
 module.exports = {
   createProject,
   getAllProjects,
   deleteProject,
   editProject,
+  featuredCount
 };

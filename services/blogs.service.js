@@ -117,9 +117,15 @@ const editBlog = (req, res) => {
   });
 };
 
+const featuredCount = async () => {
+  let count = await Blogs.countDocuments();
+  return count;
+};
+
 module.exports = {
   getAllBlogs,
   createBlog,
   deleteBlog,
   editBlog,
+  featuredCount
 };
