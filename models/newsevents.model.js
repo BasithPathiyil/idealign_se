@@ -24,6 +24,10 @@ const newseventsSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    featured: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
       enum: ["active", "deactivated"],

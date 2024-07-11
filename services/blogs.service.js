@@ -56,6 +56,10 @@ const getAllBlogs = async () => {
   return await Blogs.find();
 };
 
+const getAllFeaturedBlogs = async () => {
+  return await Blogs.find({ featured: true });
+};
+
 const deleteBlog = async (objectId) => {
   const deletedDoc = await Blogs.findByIdAndDelete(objectId);
   await removeFromDirectory(deletedDoc.mainImage);
@@ -118,7 +122,7 @@ const editBlog = (req, res) => {
 };
 
 const featuredCount = async () => {
-  let count = await Blogs.countDocuments();
+  let count = await Blogs.countDocuments({ featured: true });
   return count;
 };
 
@@ -127,5 +131,6 @@ module.exports = {
   createBlog,
   deleteBlog,
   editBlog,
-  featuredCount
+  featuredCount,
+  getAllFeaturedBlogs,
 };

@@ -19,6 +19,10 @@ const blogsSchema = new mongoose.Schema(
     youtubeLink: {
       type: String,
     },
+    featured: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
       enum: ["active", "deactivated"],

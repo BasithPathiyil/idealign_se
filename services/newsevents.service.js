@@ -53,7 +53,9 @@ const createNews = (req, res) => {
 const getAllNews = async () => {
   return await Newsevents.find();
 };
-
+const getAllFeaturedNews = async () => {
+  return await Newsevents.find({ featured: true });
+};
 const deleteNews = async (objectId) => {
   const deletedDoc = await Newsevents.findByIdAndDelete(objectId);
   await removeFromDirectory(deletedDoc.mainImage);
@@ -116,7 +118,7 @@ const editNews = (req, res) => {
 };
 
 const featuredCount = async () => {
-  let count = await Newsevents.countDocuments();
+  let count = await Newsevents.countDocuments({ featured: true });
   return count;
 };
 
@@ -125,5 +127,6 @@ module.exports = {
   createNews,
   deleteNews,
   editNews,
-  featuredCount
+  featuredCount,
+  getAllFeaturedNews,
 };

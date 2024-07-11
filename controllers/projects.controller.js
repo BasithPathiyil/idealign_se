@@ -19,6 +19,25 @@ const getAllProjects = tryCatch(async (req, res, next) => {
     arrList,
   });
 });
+
+const getAllCategoryProjects = tryCatch(async (req, res, next) => {
+  let category = req.params.category;
+  const arrList = await projectsService.getAllCategoryProjects(category);
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    arrList,
+  });
+});
+
+const getAllFeaturedProjects = tryCatch(async (req, res, next) => {
+  const arrList = await projectsService.getAllFeaturedProjects();
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    arrList,
+  });
+});
 const deleteProject = tryCatch(async (req, res, next) => {
   const deleteObj = await projectsService.deleteProject(req.query.id);
   res.status(200).json({
@@ -42,4 +61,6 @@ module.exports = {
   getAllProjects,
   deleteProject,
   editProject,
+  getAllFeaturedProjects,
+  getAllCategoryProjects,
 };

@@ -13,6 +13,9 @@ const projectSchema = new mongoose.Schema(
     place: {
       type: String,
     },
+    area: {
+      type: String,
+    },
     mainImage: {
       type: String,
       required: true,
@@ -23,6 +26,10 @@ const projectSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+    },
+    featured: {
+      type: Boolean,
+      default: false,
     },
     status: {
       type: String,

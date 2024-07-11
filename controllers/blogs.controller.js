@@ -20,6 +20,15 @@ const getAllBlogs = tryCatch(async (req, res, next) => {
   });
 });
 
+const getAllFeaturedBlogs = tryCatch(async (req, res, next) => {
+  const arrList = await blogsService.getAllFeaturedBlogs();
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    arrList,
+  });
+});
+
 const deleteBlog = tryCatch(async (req, res, next) => {
   const deleteObj = await blogsService.deleteBlog(req.query.id);
   res.status(200).json({
@@ -41,4 +50,5 @@ module.exports = {
   getAllBlogs,
   deleteBlog,
   editBlog,
+  getAllFeaturedBlogs,
 };

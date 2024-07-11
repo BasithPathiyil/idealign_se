@@ -56,6 +56,14 @@ const getAllProjects = async () => {
   return await Projects.find();
 };
 
+const getAllCategoryProjects = async (category) => {
+  return await Projects.find({ categoryId: category });
+};
+
+const getAllFeaturedProjects = async () => {
+  return await Projects.find({ featured: true });
+};
+
 const deleteProject = async (objectId) => {
   const deletedDoc = await Projects.findByIdAndDelete(objectId);
   await removeFromDirectory(deletedDoc.mainImage);
@@ -161,7 +169,7 @@ const editProject = (req, res) => {
 };
 
 const featuredCount = async () => {
-  let count = await Projects.countDocuments();
+  let count = await Projects.countDocuments({ featured: true });
   return count;
 };
 
@@ -170,5 +178,7 @@ module.exports = {
   getAllProjects,
   deleteProject,
   editProject,
-  featuredCount
+  featuredCount,
+  getAllFeaturedProjects,
+  getAllCategoryProjects,
 };

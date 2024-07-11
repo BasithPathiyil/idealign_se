@@ -20,6 +20,15 @@ const getAllNews = tryCatch(async (req, res, next) => {
   });
 });
 
+const getAllFeaturedNews = tryCatch(async (req, res, next) => {
+  const arrList = await newsService.getAllFeaturedNews();
+  res.status(200).json({
+    status: true,
+    statuscode: 200,
+    arrList,
+  });
+});
+
 const deleteNews = tryCatch(async (req, res, next) => {
   const deleteObj = await newsService.deleteNews(req.query.id);
   res.status(200).json({
@@ -42,5 +51,6 @@ module.exports = {
   createNews,
   getAllNews,
   deleteNews,
-  editNews
+  editNews,
+  getAllFeaturedNews,
 };
