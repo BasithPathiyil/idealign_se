@@ -16,6 +16,9 @@ const projectSchema = new mongoose.Schema(
     area: {
       type: String,
     },
+    client: {
+      type: String,
+    },
     mainImage: {
       type: String,
       required: true,
