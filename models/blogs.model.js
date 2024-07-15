@@ -10,6 +10,9 @@ const blogsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+    },
     shortDesc: {
       type: String,
     },
