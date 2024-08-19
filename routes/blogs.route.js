@@ -4,10 +4,10 @@ const { blogsController } = require("../controllers");
 
 const router = express.Router();
 
-router.post("/add", blogsController.createBlog);
+router.post("/add", auth, blogsController.createBlog);
 router.get("/get", blogsController.getAllBlogs);
 router.get("/featured", blogsController.getAllFeaturedBlogs);
-router.delete("/delete", blogsController.deleteBlog);
-router.put("/edit", blogsController.editBlog);
+router.delete("/delete", auth, blogsController.deleteBlog);
+router.put("/edit", auth, blogsController.editBlog);
 
 module.exports = router;

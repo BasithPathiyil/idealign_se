@@ -19,6 +19,18 @@ const projectSchema = new mongoose.Schema(
     client: {
       type: String,
     },
+    architect: {
+      type: String,
+    },
+    mepConsultant: {
+      type: String,
+    },
+    structuralConsultant: {
+      type: String,
+    },
+    landscapeConsultant: {
+      type: String,
+    },
     mainImage: {
       type: String,
       required: true,
