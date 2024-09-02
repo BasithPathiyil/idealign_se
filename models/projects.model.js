@@ -31,6 +31,10 @@ const projectSchema = new mongoose.Schema(
     landscapeConsultant: {
       type: String,
     },
+    eventDate: {
+      type: Date,
+      default: Date.now,
+    },
     mainImage: {
       type: String,
       required: true,
